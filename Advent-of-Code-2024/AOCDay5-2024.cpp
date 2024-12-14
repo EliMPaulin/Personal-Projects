@@ -72,6 +72,8 @@ void Part2(std::vector<std::vector<int>> unordered_updates, std::vector<std::vec
                 
                 unordered_updates[i][index1] = page_ordering_rules[j][1];
                 unordered_updates[i][index2] = page_ordering_rules[j][0];
+
+                // Check all rules from the beginning with swapped values
                 j = -1;
                 continue;
             }
@@ -146,7 +148,11 @@ int main() {
         // Test all rules for the specific page.
         for (int j = 0; j < page_ordering_rules.size(); j++) {
             if (!(isXBeforeY(page_ordering_rules[j][0], page_ordering_rules[j][1], updates[i]))){
+                
                 unordered_updates.push_back(updates[i]);
+
+                // If the page numbers in the update are not in the correct order,
+                // goto the end of the loop to avoid summing the middle value.
                 goto EOL;
             }
         }
